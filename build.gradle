@@ -1,0 +1,3 @@
+task startContainers(type: Exec) {
+    commandLine 'docker-compose', 'up'
+}
