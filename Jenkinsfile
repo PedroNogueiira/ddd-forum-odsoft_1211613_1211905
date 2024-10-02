@@ -33,8 +33,10 @@ pipeline {
 
         stage("Clean") {
             steps {
-                // Uncomment or add your cleanup command here
+                // If you want to clean up files, uncomment or add appropriate steps
                 // sh "npm run clean"
+                sh 'npm prune'
+                sh 'rm -rf node_modules'
             }
         }
     }
