@@ -1,19 +1,26 @@
 pipeline {
-  agent { label 'master' }
-  stages {
-     stage("Create container") {
-        steps {
-        script {
-           SEQ = sh(returnStdout: true, script: 'seq 1 9').trim()
-           sh "echo '${SEQ}'"
-           sh """
-           for id in '{$SEQ}'
-           do
-              echo \$id
-           done
-           """
+    agent any
+    stages {
+        stage("Checkout") {
+            steps {
+                checkout scm
+            }
         }
+
+          stage ('Hello') {
+            agent any
+
+            steps {
+                echo 'Hello, '
+
+                sh '''#!/bin/bash
+
+                    echo "Hello from bash"
+                    echo "Who I'm $SHELL"
+                '''
+            }
         }
-     }
-  }
-  }
+
+
+    }
+}
