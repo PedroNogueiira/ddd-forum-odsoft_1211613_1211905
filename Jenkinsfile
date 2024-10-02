@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'linux'
+    }
     stages {
         stage("Checkout") {
             steps {
@@ -7,20 +9,37 @@ pipeline {
             }
         }
 
-          stage ('Hello') {
-            agent any
-
+        stage("Install dependencies") {
             steps {
-                echo 'Hello, '
-
-                sh '''#!/bin/bash
-
-                    echo "Hello from bash"
-                    echo "Who I'm $SHELL"
-                '''
+                sh "npm install"
             }
         }
 
+        stage("Run tests") {
+            steps {
+                sh "npm test"
+            }
+        }
 
+        stage("Build") {
+            steps {
+                sh "npm run-script build"
+            }
+        }
+
+        stage("Deploy") {
+            steps {
+                sh "npm run deploy"
+            }
+        }
+
+        stage("Clean") {
+            steps {
+                // If you want to clean up files, uncomment or add appropriate steps
+                // sh "npm run clean"
+                sh 'npm prune'
+                sh 'rm -rf node_modules'
+            }
+        }
     }
 }
