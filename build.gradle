@@ -1,3 +1,30 @@
-task startContainers(type: Exec) {
-    commandLine 'docker-compose', 'up'
+plugins {
+    id "com.github.node-gradle.node" version "7.0.0"
+}
+
+node {
+    version = '12.22.21' // Specify the Node.js version you want to use
+    npmVersion = '9.0.0' // Optionally, specify the npm version
+    download = true // Automatically download and install Node.js
+}
+
+task runUnitTests {
+    doLast {
+        
+    }
+}
+
+task generateUnitTestsCoverageReport{
+    doLast {
+    }
+}
+
+task runAPITests{
+    doLast {
+    }
+}
+
+task generateAPITestsCoverageReport{
+    doLast {
+    }
 }
