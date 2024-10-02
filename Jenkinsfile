@@ -27,7 +27,7 @@ pipeline {
 
         stage("Deploy") {
             steps {
-               // bat "npm run deploy"
+               echo "Deploying to production..."
             }
         }
 
