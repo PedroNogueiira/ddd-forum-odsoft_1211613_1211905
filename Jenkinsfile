@@ -1,43 +1,19 @@
 pipeline {
-    agent any
-    stages {
-        stage("Checkout") {
-            steps {
-                checkout scm
-            }
+  agent { label 'master' }
+  stages {
+     stage("Create container") {
+        steps {
+        script {
+           SEQ = sh(returnStdout: true, script: 'seq 1 9').trim()
+           sh "echo '${SEQ}'"
+           sh """
+           for id in '{$SEQ}'
+           do
+              echo \$id
+           done
+           """
         }
-
-        stage("Install dependencies") {
-            steps {
-                sh "npm install"
-            }
         }
-
-        stage("Run tests") {
-            steps {
-                sh "npm test"
-            }
-        }
-
-        stage("Build") {
-            steps {
-                sh "npm run-script build"
-            }
-        }
-
-        stage("Deploy") {
-            steps {
-                sh "npm run deploy"
-            }
-        }
-
-        stage("Clean") {
-            steps {
-                // If you want to clean up files, uncomment or add appropriate steps
-                // sh "npm run clean"
-                sh 'npm prune'
-                sh 'rm -rf node_modules'
-            }
-        }
-    }
-}
+     }
+  }
+  }
