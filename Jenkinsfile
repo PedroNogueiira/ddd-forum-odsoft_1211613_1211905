@@ -27,12 +27,16 @@ pipeline {
 
         stage("Deploy") {
             steps {
-                bat "npm run deploy"
+               // bat "npm run deploy"
             }
         }
 
+        // Clean stage should be placed in the same format as others
         stage("Clean") {
-            steps
+            steps {
+                bat 'npm prune'
+                bat 'rmdir /s /q node_modules'
+            }
         }
     }
 }
