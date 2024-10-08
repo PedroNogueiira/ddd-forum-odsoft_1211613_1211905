@@ -11,14 +11,14 @@ pipeline {
       stage('Build') {
         steps {
           echo 'Building...'
-          sh ./gradlew npm_run-script_build
+          ./gradlew npm_run-script_build
         }
       }
 
       stage('Test') {
         steps {
           echo 'Testing...'
-          sh ./gradlew npm_test
+          ./gradlew npm_test
         }
       }
 
