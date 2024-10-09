@@ -12,19 +12,13 @@ pipeline {
 //     }
 
     stages {
-//         stage('Checkout') {
-//             steps {
-//                 // Checkout the 'pedro' branch from the repository
-//                 git branch: 'pedro', url: 'https://github.com/PedroNogueiira/ddd-forum-odsoft_1211613_1211905.git'
-//             }
-//         }
 
         stage('Install Dependencies') {
             steps {
                 script {
                     // Run Gradle task to install npm dependencies
                     echo 'Install Dependencies...'
-                    gradlew npm_install
+                    powershell './gradlew.bat npm_install'
                 }
             }
         }
@@ -33,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    bat './gradlew npm_run_build'
+                    powershell './gradlew.bat npm_run_build'
                 }
             }
         }
@@ -42,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    bat './gradlew npm_run_test'
+                    powershell './gradlew.bat npm_run_test'
                 }
             }
         }
