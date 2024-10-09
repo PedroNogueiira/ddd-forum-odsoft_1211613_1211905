@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_VERSION = '12.22.12' // Ensuring the correct Node.js version
-    }
-
-    tools {
-        nodejs 'NodeJS 12.22.12'
-    }
+//     environment {
+//         NODE_VERSION = '12.22.12' // Ensuring the correct Node.js version
+//     }
+//
+//     tools {
+//         nodejs 'NodeJS 12.22.12'
+//     }
 
     stages {
 //         stage('Checkout') {
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle task to install npm dependencies
-                    bat gradlew.bat npm_install
+                    bat 'gradlew.bat npm_install'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    bat gradlew.bat npm_run_build
+                    bat 'gradlew.bat npm_run_build'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    bat gradlew.bat npm_run_test
+                    bat 'gradlew.bat npm_run_test'
                 }
             }
         }
