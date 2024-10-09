@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle to Package the project into a .jar file
-
+                    echo 'Packaging...'
                 }
             }
         }
