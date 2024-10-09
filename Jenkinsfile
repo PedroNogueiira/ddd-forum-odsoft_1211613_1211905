@@ -1,3 +1,5 @@
+#!groovy
+
 pipeline {
     agent any
 
@@ -21,7 +23,8 @@ pipeline {
             steps {
                 script {
                     // Run Gradle task to install npm dependencies
-                    ./gradlew.bat npm_install
+                    echo 'Install Dependencies...'
+                    bat './gradlew npm_install'
                 }
             }
         }
@@ -30,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    ./gradlew.bat npm_run_build
+                    bat './gradlew npm_run_build;'
                 }
             }
         }
@@ -39,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    ./gradlew.bat npm_run_test
+                    bat './gradlew npm_run_test'
                 }
             }
         }
