@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Run Gradle task to install npm dependencies
                     echo 'Install Dependencies...'
-                    bat './gradlew npm_install'
+                    gradlew npm_install
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                     // Run Gradle tasks to build the project
-                    bat './gradlew npm_run_build;'
+                    bat './gradlew npm_run_build'
                 }
             }
         }
