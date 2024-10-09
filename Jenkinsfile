@@ -1,49 +1,58 @@
 pipeline {
     agent any
 
-    tools {
-      git 'Default'
-      nodejs 'NodeJS 12.22.12'
-    }
-
-
     stages {
-      stage('Build') {
-        steps {
-          echo 'Building...'
-          ./gradlew npm_run-script_build
+        stage('Checkout') {
+            steps {
+                // Checkout the code from repo
+                git 'https://github.com/PedroNogueiira/ddd-forum-odsoft_1211613_1211905.git'
+            }
         }
-      }
 
-      stage('Test') {
-        steps {
-          echo 'Testing...'
-          ./gradlew npm_test
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Run Gradle task to install npm dependencies
+                    sh './gradlew npm_install'
+                }
+            }
         }
-      }
 
-      stage('Compile') {
-        steps {
-          // One or more steps need to be included within the steps block.
+        stage('Build') {
+            steps {
+                script {
+                    // Run Gradle tasks to build the project
+                    sh './gradlew npm_run_build'
+                }
+            }
         }
-      }
 
-      stage('Package') {
-        steps {
-          // One or more steps need to be included within the steps block.
+        stage('Test') {
+            steps {
+                script {
+                    // Run Gradle tasks to build the project
+                    sh './gradlew npm_run_test'
+                }
+            }
         }
-      }
 
+        stage('Package') {
+            steps {
+                script {
+                    // Run Gradle to Package the project into a .jar file
+
+                }
+            }
+        }
     }
 
     post {
-      success {
-        echo 'Success'
-      }
-      failure {
-        echo 'Failure'
-      }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
     }
-
 
 }
