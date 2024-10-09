@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from repo
-                git 'https://github.com/PedroNogueiira/ddd-forum-odsoft_1211613_1211905.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 script {
